@@ -14,4 +14,16 @@ public class PayDesk {
     public void setBalance(double balance) {
         Balance = balance;
     }
+
+    public void AddBalance(double addedAmount){
+        this.Balance += addedAmount;
+    }
+
+    public void TakeBalance(double takenAmount)
+    {
+        if(this.Balance >= takenAmount)
+        {
+            this.Balance -= takenAmount;
+        }
+    }
 }

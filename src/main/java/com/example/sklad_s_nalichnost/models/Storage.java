@@ -8,4 +8,9 @@ public class Storage {
     public Storage(List<Stock> availableStock) {
         AvailableStock = availableStock;
     }
+
+    public void AddStock(Stock stock)
+    {
+        AvailableStock.add(stock);
+    }
 }
