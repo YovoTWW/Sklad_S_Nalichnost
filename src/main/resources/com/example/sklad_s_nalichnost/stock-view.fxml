@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sklad_s_nalichnost.controllers.StockController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <TableView fx:id="tableView">
+        <columns>
+            <TableColumn text="Name" fx:id="nameCol"/>
+            <TableColumn text="Available Quantity" fx:id="availableQuantityCol"/>
+            <TableColumn text="Delivery Price ($)" fx:id="deliveryPriceCol"/>
+            <TableColumn text="Selling Price ($)" fx:id="sellingPriceCol"/>
+        </columns>
+    </TableView>
+
+    <Button text="Back" onAction="#goBack"/>
+</VBox>

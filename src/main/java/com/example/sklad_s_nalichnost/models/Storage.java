@@ -1,16 +1,22 @@
 package com.example.sklad_s_nalichnost.models;
 
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Storage {
-    private List<Stock> AvailableStock;
+    private ObservableList<Stock> availableStock;
 
-    public Storage(List<Stock> availableStock) {
-        AvailableStock = availableStock;
+    public Storage() {
+        availableStock = FXCollections.observableArrayList();
     }
 
-    public void AddStock(Stock stock)
+    public void addStock(Stock stock)
     {
-        AvailableStock.add(stock);
+        availableStock.add(stock);
+    }
+
+    public ObservableList<Stock> getAvailableStock()
+    {
+        return availableStock;
     }
 }

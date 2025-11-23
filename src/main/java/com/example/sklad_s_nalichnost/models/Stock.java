@@ -1,47 +1,47 @@
 package com.example.sklad_s_nalichnost.models;
 
 public class Stock {
-    private String Name;
-    private double DeliveryPrice;
-    private double SellingPrice;
-    private int AvailableQuantity;
+    private String name;
+    private double deliveryPrice;
+    private double sellingPrice;
+    private int availableQuantity;
 
     public Stock(String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
-        Name = name;
-        DeliveryPrice = deliveryPrice;
-        SellingPrice = sellingPrice;
-        AvailableQuantity = availableQuantity;
+        this.name = name;
+        this.deliveryPrice = deliveryPrice;
+        this.sellingPrice = sellingPrice;
+        this.availableQuantity = availableQuantity;
     }
 
     public int getAvailableQuantity() {
-        return AvailableQuantity;
+        return availableQuantity;
     }
 
     public void setAvailableQuantity(int availableQuantity) {
-        AvailableQuantity = availableQuantity;
+        this.availableQuantity = availableQuantity;
     }
 
     public double getSellingPrice() {
-        return SellingPrice;
+        return sellingPrice;
     }
 
     public void setSellingPrice(double sellingPrice) {
-        SellingPrice = sellingPrice;
+        this.sellingPrice = sellingPrice;
     }
 
     public double getDeliveryPrice() {
-        return DeliveryPrice;
+        return deliveryPrice;
     }
 
     public void setDeliveryPrice(double deliveryPrice) {
-        DeliveryPrice = deliveryPrice;
+        this.deliveryPrice = deliveryPrice;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }

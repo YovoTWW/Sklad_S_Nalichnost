@@ -1,4 +1,4 @@
-package com.example.sklad_s_nalichnost;
+package com.example.sklad_s_nalichnost.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

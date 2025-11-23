@@ -13,4 +13,7 @@ module com.example.sklad_s_nalichnost {
 
     opens com.example.sklad_s_nalichnost to javafx.fxml;
     exports com.example.sklad_s_nalichnost;
+    exports com.example.sklad_s_nalichnost.controllers;
+    opens com.example.sklad_s_nalichnost.controllers to javafx.fxml;
+    opens com.example.sklad_s_nalichnost.models to javafx.base;
 }
