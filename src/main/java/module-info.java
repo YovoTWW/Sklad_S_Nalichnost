@@ -10,6 +10,7 @@ module com.example.sklad_s_nalichnost {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.example.sklad_s_nalichnost to javafx.fxml;
     exports com.example.sklad_s_nalichnost;

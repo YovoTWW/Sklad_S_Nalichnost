@@ -1,9 +1,9 @@
 package com.example.sklad_s_nalichnost.models;
 
-public class Client {
+public class Supplier {
     private String Name;
 
-    public Client(String name) {
+    public Supplier(String name) {
         Name = name;
     }
 

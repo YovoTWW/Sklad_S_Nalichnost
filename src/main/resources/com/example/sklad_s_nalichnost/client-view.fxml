@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sklad_s_nalichnost.controllers.ClientController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <TableView fx:id="tableView">
+        <columns>
+            <TableColumn text="Client Name" fx:id="nameCol"/>
+            <TableColumn text="Sell To" fx:id="sellCol" />
+        </columns>
+    </TableView>
+
+    <HBox spacing="5">
+        <TextField fx:id="nameField" promptText="Name"/>
+        <Button text="Add" onAction="#addClient"/>
+    </HBox>
+
+    <Button text="Back" onAction="#goBack"/>
+</VBox>

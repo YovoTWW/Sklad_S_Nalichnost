@@ -14,8 +14,31 @@ public class HomeController {
 
     @FXML
     protected void ShowStock(javafx.event.ActionEvent event) throws IOException{
-        //Button_Show_Stock.setText("Available Stock:");
         Parent stockView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/stock-view.fxml"));
+
+        // Get current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Replace scene
+        stage.setScene(new Scene(stockView,500,500));
+        stage.show();
+    }
+
+    @FXML
+    protected void ShowClients(javafx.event.ActionEvent event) throws IOException{
+        Parent stockView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/client-view.fxml"));
+
+        // Get current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Replace scene
+        stage.setScene(new Scene(stockView,500,500));
+        stage.show();
+    }
+
+    @FXML
+    protected void ShowSuppliers(javafx.event.ActionEvent event) throws IOException{
+        Parent stockView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/supplier-view.fxml"));
 
         // Get current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
