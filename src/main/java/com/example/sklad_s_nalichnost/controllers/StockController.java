@@ -27,14 +27,8 @@ public class StockController {
     @FXML
     private TableColumn<Stock, Double> sellingPriceCol;
 
-    private Storage storage;
-
     @FXML
     public void initialize() {
-        // Create storage and sample data
-        storage = new Storage();
-        storage.addStock(new Stock("Apples", 1.2, 2.0, 100));
-        storage.addStock(new Stock("Bananas", 0.8, 1.5, 80));
 
         // Connect table columns to Stock getters
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -43,7 +37,7 @@ public class StockController {
         sellingPriceCol.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
 
         // Add data to table
-        tableView.setItems(storage.getAvailableStock());
+        tableView.setItems(Storage.instance.getAvailableStock());
     }
 
     @FXML

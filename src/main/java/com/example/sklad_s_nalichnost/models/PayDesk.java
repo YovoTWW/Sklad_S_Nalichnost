@@ -1,18 +1,12 @@
 package com.example.sklad_s_nalichnost.models;
 
 public class PayDesk {
-    private double Balance;
 
-    public PayDesk(double balance) {
-        Balance = balance;
-    }
+    public static final PayDesk instance = new PayDesk();
+    private double Balance;
 
     public double getBalance() {
         return Balance;
-    }
-
-    public void setBalance(double balance) {
-        Balance = balance;
     }
 
     public void AddBalance(double addedAmount){
@@ -25,5 +19,9 @@ public class PayDesk {
         {
             this.Balance -= takenAmount;
         }
+    }
+
+    public void Initialize(){
+        Balance = 10000;
     }
 }
