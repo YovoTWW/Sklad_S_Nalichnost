@@ -1,16 +1,24 @@
 package com.example.sklad_s_nalichnost.models;
 
+import java.util.UUID;
+
 public class Stock {
+    private UUID id;
     private String name;
     private double deliveryPrice;
     private double sellingPrice;
     private int availableQuantity;
 
     public Stock(String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
+        id = UUID.randomUUID();
         this.name = name;
         this.deliveryPrice = deliveryPrice;
         this.sellingPrice = sellingPrice;
         this.availableQuantity = availableQuantity;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public int getAvailableQuantity() {

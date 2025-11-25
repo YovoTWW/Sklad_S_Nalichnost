@@ -11,32 +11,80 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class SupplierController {
 
     @FXML
-    private TableView tableView;
+    private TableView<Supplier> tableView;
+    @FXML
+    private TableColumn<Supplier, UUID> idCol;
     @FXML
     private TableColumn<Supplier, String> nameCol;
+    @FXML
+    private TableColumn<Supplier, Void> buyCol;
     @FXML
     private TextField nameField;
 
     @FXML
     public void initialize() {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        buyCol.setCellFactory(col -> new TableCell<>() {
+
+            private final Button btn = new Button("Buy Stock from Supplier");
+
+            {
+                btn.setOnAction(event -> {
+                    Supplier supplier = getTableView().getItems().get(getIndex());
+                    buyFromSupplier(supplier);// your method
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btn);
+                }
+            }
+
+        });
         refreshTable();
     }
 
     private void refreshTable() {
         tableView.setItems(DataList.instance.Suppliers);
+    }
+
+    @FXML
+    public void buyFromSupplier(Supplier supplier){
+        try {
+            // Save selected seller
+            DataList.instance.setCurrentSeller(supplier);
+
+            // Load buy-stock-view.fxml
+            Parent buyView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/buy-stock-view.fxml"));
+
+            // Get current stage
+            Stage stage = (Stage) tableView.getScene().getWindow();
+
+            // Switch scene
+            stage.setScene(new Scene(buyView));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Error", "Failed to open buy stock view.");
+        }
     }
 
     @FXML

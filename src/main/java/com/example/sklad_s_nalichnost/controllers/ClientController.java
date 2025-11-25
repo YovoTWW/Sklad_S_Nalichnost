@@ -13,11 +13,14 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.util.UUID;
 
 public class ClientController {
 
     @FXML
     private TableView<Client> tableView;
+    @FXML
+    private TableColumn<Client, UUID> idCol;
     @FXML
     private TableColumn<Client, String> nameCol;
     @FXML
@@ -27,6 +30,8 @@ public class ClientController {
 
     @FXML
     public void initialize() {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         sellCol.setCellFactory(col -> new TableCell<>() {

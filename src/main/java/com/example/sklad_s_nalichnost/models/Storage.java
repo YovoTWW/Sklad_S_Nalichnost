@@ -3,6 +3,8 @@ package com.example.sklad_s_nalichnost.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.UUID;
+
 public  class Storage {
 
     public static final Storage instance = new Storage();
@@ -11,6 +13,11 @@ public  class Storage {
     public void addStock(Stock stock)
     {
         availableStock.add(stock);
+    }
+
+    public void removeStock(Stock stock)
+    {
+        availableStock.remove(stock);
     }
 
     public ObservableList<Stock> getAvailableStock()

@@ -3,8 +3,18 @@ package com.example.sklad_s_nalichnost.controllers;
 import com.example.sklad_s_nalichnost.DataList;
 import com.example.sklad_s_nalichnost.models.Stock;
 import com.example.sklad_s_nalichnost.models.Storage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class SellStockController {
 
@@ -12,7 +22,7 @@ public class SellStockController {
     private ComboBox<Stock> stockDropdown;
 
     @FXML
-    private TextField nameField;
+    private TextField idField;
 
     @FXML
     private TextField quantityField;
@@ -26,13 +36,26 @@ public class SellStockController {
     @FXML
     public void initialize() {
 
+        // Convert Stock object to a readable name in the dropdown
+        stockDropdown.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Stock stock) {
+                return stock != null ? stock.getName() : "";
+            }
+
+            @Override
+            public Stock fromString(String s) {
+                return null; // not used
+            }
+        });
+
         // Fill dropdown with stock items
         stockDropdown.setItems(Storage.instance.getAvailableStock());
 
         // When user selects a stock
         stockDropdown.valueProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
-                nameField.setText(selected.getName());
+                idField.setText(selected.getId().toString());
                 maxLabel.setText("(max: " + selected.getAvailableQuantity() + ")");
                 confirmButton.setVisible(true);
                 quantityField.clear();
@@ -74,7 +97,7 @@ public class SellStockController {
         }
 
         int quantity = Integer.parseInt(quantityField.getText());
-
+        UUID stockId = selected.getId();
         // Call your event here
         // --------------------------------------------------
         System.out.println("Selected: " + selected.getName() +
@@ -82,6 +105,16 @@ public class SellStockController {
         // --------------------------------------------------
 
         showInfo("You selected " + quantity + " of " + selected.getName());
+        DataList.instance.SellStock(stockId,quantity);
+        resetFields();
+    }
+
+    private void resetFields() {
+        stockDropdown.getSelectionModel().clearSelection();  // clear dropdown selection
+        idField.clear();                                   // clear name field
+        quantityField.clear();                               // clear quantity input
+        maxLabel.setText("(max: -)");                        // reset max label
+        confirmButton.setVisible(false);                     // hide confirm button
     }
 
     private void showError(String msg) {
@@ -92,5 +125,13 @@ public class SellStockController {
     private void showInfo(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void goBack(ActionEvent event) throws IOException {
+        Parent homeView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/client-view.fxml"));
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(homeView,500,500));
+        stage.show();
     }
 }
