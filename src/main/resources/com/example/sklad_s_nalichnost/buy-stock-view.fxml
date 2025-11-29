@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox spacing="12" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sklad_s_nalichnost.controllers.BuyStockController"
+      style="-fx-padding: 20;">
+
+    <!-- Dropdown Menu -->
+    <HBox spacing="10">
+        <Label text="Select Stock Name:" />
+        <ComboBox fx:id="stockDropdown" prefWidth="200"/>
+    </HBox>
+
+    <!-- Selected Stock Name -->
+    <HBox spacing="10">
+        <Label text="Id:" />
+        <TextField fx:id="idField" prefWidth="250" editable="false"/>
+    </HBox>
+
+    <!-- Quantity Input -->
+    <HBox spacing="10">
+        <Label text="Quantity:" />
+        <TextField fx:id="quantityField" prefWidth="80"/>
+        <Label fx:id="maxLabel" text="(max: -)"/>
+    </HBox>
+
+    <!-- Hidden until stock is selected -->
+    <Button fx:id="confirmButton" text="Confirm" visible="false" prefWidth="120"
+            onAction="#onConfirm"/>
+    <Button text="Back" onAction="#goBack"/>
+
+</VBox>

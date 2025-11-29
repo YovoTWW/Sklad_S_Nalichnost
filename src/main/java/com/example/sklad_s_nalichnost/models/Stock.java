@@ -17,6 +17,14 @@ public class Stock {
         this.availableQuantity = availableQuantity;
     }
 
+    public Stock(UUID id,String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
+        this.id = id;
+        this.name = name;
+        this.deliveryPrice = deliveryPrice;
+        this.sellingPrice = sellingPrice;
+        this.availableQuantity = availableQuantity;
+    }
+
     public UUID getId() {
         return id;
     }

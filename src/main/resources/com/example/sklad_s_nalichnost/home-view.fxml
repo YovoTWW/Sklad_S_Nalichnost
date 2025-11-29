@@ -17,5 +17,5 @@
     <Button text="Show Balance" onAction="#ShowBalance"/>
     <Button text="Show Stock" onAction="#ShowStock"/>
     <Button text="Show Clients" onAction="#ShowClients"/>
-    <Button text="Add Supplier" onAction="#ShowSuppliers"/>
+    <Button text="Show Suppliers" onAction="#ShowSuppliers"/>
 </VBox>

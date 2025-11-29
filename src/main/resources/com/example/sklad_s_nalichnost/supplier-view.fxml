@@ -14,7 +14,9 @@
 
     <TableView fx:id="tableView">
         <columns>
+            <TableColumn text="Supplier Id" fx:id="idCol"/>
             <TableColumn text="Supplier Name" fx:id="nameCol"/>
+            <TableColumn text="Buy Stock" fx:id="buyCol" />
         </columns>
     </TableView>
 
