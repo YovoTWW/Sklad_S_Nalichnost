@@ -11,7 +11,7 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 public class DataList {
-    public static final DataList instance = new DataList();
+    /*public static final DataList instance = new DataList();
     public ObservableList<Client> Clients;
     public ObservableList<Supplier> Suppliers;
     public ObservableList<Invoice> Invoices;
@@ -26,8 +26,8 @@ public class DataList {
         Invoices = FXCollections.observableArrayList();
         BuyableStock = FXCollections.observableArrayList();
 
-        Clients.add(new Client("Misho"));
-        Clients.add(new Client("Ivan"));
+        //Clients.add(new Client("Misho"));
+        //Clients.add(new Client("Ivan"));
 
         Suppliers.add(new Supplier("Fruits and More co."));
 
@@ -91,5 +91,5 @@ public class DataList {
             throw new IllegalArgumentException("Not enough Balanace in Paydesk for Transaction.");
         }
     }
-
+*/
 }

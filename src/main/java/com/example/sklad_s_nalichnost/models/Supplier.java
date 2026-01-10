@@ -6,8 +6,9 @@ public class Supplier {
     private UUID Id;
     private String Name;
 
-    public Supplier(String name) {
-        Id = UUID.randomUUID();
+    public Supplier(UUID id,String name) {
+        //Id = UUID.randomUUID();
+        Id = id;
         Name = name;
     }
 

@@ -11,6 +11,7 @@ module com.example.sklad_s_nalichnost {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
 
     opens com.example.sklad_s_nalichnost to javafx.fxml;
     exports com.example.sklad_s_nalichnost;

@@ -6,8 +6,9 @@ public class Client {
     private UUID Id;
     private String Name;
 
-    public Client(String name) {
-        Id = UUID.randomUUID();
+    public Client(UUID id,String name) {
+        //Id = UUID.randomUUID();
+        Id = id;
         Name = name;
     }
 
