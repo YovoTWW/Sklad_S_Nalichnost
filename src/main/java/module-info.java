@@ -12,6 +12,7 @@ module com.example.sklad_s_nalichnost {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires java.sql;
+    requires com.microsoft.sqlserver.jdbc;
 
     opens com.example.sklad_s_nalichnost to javafx.fxml;
     exports com.example.sklad_s_nalichnost;

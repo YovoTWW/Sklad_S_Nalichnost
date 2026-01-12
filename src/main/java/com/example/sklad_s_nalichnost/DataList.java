@@ -11,7 +11,7 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 public class DataList {
-    /*public static final DataList instance = new DataList();
+    public static final DataList instance = new DataList();
     public ObservableList<Client> Clients;
     public ObservableList<Supplier> Suppliers;
     public ObservableList<Invoice> Invoices;
@@ -19,7 +19,7 @@ public class DataList {
 
     public Client currentBuyer;
     public Supplier currentSeller;
-
+    /*
     public void initialize(){
         Clients = FXCollections.observableArrayList();
         Suppliers = FXCollections.observableArrayList();

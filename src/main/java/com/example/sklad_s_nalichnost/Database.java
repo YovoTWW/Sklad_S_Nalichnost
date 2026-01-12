@@ -7,13 +7,22 @@ import java.sql.SQLException;
 public class Database {
 
     private static final String URL =
-            "jdbc:sqlserver://DESKTOP-CB7O1OT;databaseName=SkladDB;encrypt=true;trustServerCertificate=true";
+            "jdbc:sqlserver://DESKTOP-CB7O1OT;databaseName=SkladDb;encrypt=true;trustServerCertificate=true";
+
+    private static final String USER = "";      // or your SQL user
+    private static final String PASSWORD = "";  // or your password
 
     private static Connection connection;
 
     public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("SQL Server JDBC Driver not found", e);
+        }
+
         if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection(URL, null, null);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         return connection;
     }

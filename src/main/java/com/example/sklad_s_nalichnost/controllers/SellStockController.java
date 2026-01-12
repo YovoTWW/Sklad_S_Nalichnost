@@ -105,7 +105,7 @@ public class SellStockController {
         // --------------------------------------------------
 
         showInfo("You selected " + quantity + " of " + selected.getName());
-        DataList.instance.SellStock(stockId,quantity);
+        //DataList.instance.SellStock(stockId,quantity);
         resetFields();
     }
 

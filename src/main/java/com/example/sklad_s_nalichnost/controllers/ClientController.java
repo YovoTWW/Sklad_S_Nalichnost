@@ -2,6 +2,8 @@ package com.example.sklad_s_nalichnost.controllers;
 
 import com.example.sklad_s_nalichnost.DataList;
 import com.example.sklad_s_nalichnost.models.Client;
+import com.example.sklad_s_nalichnost.repositories.ClientRepository;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.UUID;
 
 public class ClientController {
@@ -27,6 +30,8 @@ public class ClientController {
     private TableColumn<Client, Void> sellCol;
     @FXML
     private TextField nameField;
+
+    private final ClientRepository clientRepo = new ClientRepository();
 
     @FXML
     public void initialize() {
@@ -61,7 +66,11 @@ public class ClientController {
     }
 
     private void refreshTable() {
-        tableView.setItems(DataList.instance.Clients);
+        //tableView.setItems(DataList.instance.Clients);
+
+            tableView.setItems(
+                    FXCollections.observableArrayList(clientRepo.getAll())
+            );
     }
 
     @FXML
@@ -72,7 +81,8 @@ public class ClientController {
                 showError("Invalid Name", "Client name cannot be empty.");
                 return;
             }
-            DataList.instance.Clients.add(new Client(name));
+            //DataList.instance.Clients.add(new Client(name));
+            clientRepo.add(new Client(UUID.randomUUID(),name));
             refreshTable();
             nameField.clear();
     }
@@ -89,7 +99,7 @@ public class ClientController {
     public void sellToClient(Client client){
         try {
             // Save selected buyer
-            DataList.instance.setCurrentBuyer(client);
+            //DataList.instance.setCurrentBuyer(client);
 
             // Load sell-stock-view.fxml
             Parent sellView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/sell-stock-view.fxml"));

@@ -12,9 +12,9 @@ import java.io.IOException;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Storage.instance.Initialize();
-        PayDesk.instance.Initialize();
-        DataList.instance.initialize();
+       // Storage.instance.Initialize();
+        //PayDesk.instance.Initialize();
+        //DataList.instance.initialize();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Output");
