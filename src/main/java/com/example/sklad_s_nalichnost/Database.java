@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
 
     private static final String URL =
-            "jdbc:sqlserver://DESKTOP-CB7O1OT;databaseName=SkladDb;encrypt=true;trustServerCertificate=true";
+            "jdbc:sqlserver://localhost;databaseName=SkladDb;encrypt=true;trustServerCertificate=true";
 
     private static final String USER = "";      // or your SQL user
     private static final String PASSWORD = "";  // or your password
