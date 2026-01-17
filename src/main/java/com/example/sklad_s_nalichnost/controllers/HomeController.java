@@ -1,5 +1,6 @@
 package com.example.sklad_s_nalichnost.controllers;
 
+import com.example.sklad_s_nalichnost.MainApplication;
 import com.example.sklad_s_nalichnost.models.PayDesk;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,5 +55,10 @@ public class HomeController {
     @FXML
     public void ShowBalance() {
         outputText.setText("Current Balance :"+ PayDesk.instance.getBalance() + "$");
+    }
+
+    @FXML
+    public void ChangeDBstate(){
+        MainApplication.usesDB = !MainApplication.usesDB;
     }
 }

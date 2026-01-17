@@ -19,15 +19,15 @@ public class DataList {
 
     public Client currentBuyer;
     public Supplier currentSeller;
-    /*
+
     public void initialize(){
         Clients = FXCollections.observableArrayList();
         Suppliers = FXCollections.observableArrayList();
         Invoices = FXCollections.observableArrayList();
         BuyableStock = FXCollections.observableArrayList();
 
-        //Clients.add(new Client("Misho"));
-        //Clients.add(new Client("Ivan"));
+        Clients.add(new Client("Misho"));
+        Clients.add(new Client("Ivan"));
 
         Suppliers.add(new Supplier("Fruits and More co."));
 
@@ -91,5 +91,4 @@ public class DataList {
             throw new IllegalArgumentException("Not enough Balanace in Paydesk for Transaction.");
         }
     }
-*/
 }

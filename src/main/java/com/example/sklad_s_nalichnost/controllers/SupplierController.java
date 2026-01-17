@@ -69,7 +69,7 @@ public class SupplierController {
     public void buyFromSupplier(Supplier supplier){
         try {
             // Save selected seller
-            //DataList.instance.setCurrentSeller(supplier);
+            DataList.instance.setCurrentSeller(supplier);
 
             // Load buy-stock-view.fxml
             Parent buyView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/buy-stock-view.fxml"));
@@ -95,7 +95,7 @@ public class SupplierController {
             showError("Invalid Name", "Supplier name cannot be empty.");
             return;
         }
-        //DataList.instance.Suppliers.add(new Supplier(name));
+        DataList.instance.Suppliers.add(new Supplier(name));
         refreshTable();
         nameField.clear();
     }

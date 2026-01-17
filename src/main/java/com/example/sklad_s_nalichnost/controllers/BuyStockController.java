@@ -105,7 +105,7 @@ public class BuyStockController {
         // --------------------------------------------------
 
         showInfo("You selected " + quantity + " of " + selected.getName());
-        //DataList.instance.BuyStock(stockId,quantity);
+        DataList.instance.BuyStock(stockId,quantity);
         resetFields();
     }
 

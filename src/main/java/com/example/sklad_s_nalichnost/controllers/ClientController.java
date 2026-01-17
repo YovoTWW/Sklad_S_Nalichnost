@@ -1,6 +1,7 @@
 package com.example.sklad_s_nalichnost.controllers;
 
 import com.example.sklad_s_nalichnost.DataList;
+import com.example.sklad_s_nalichnost.MainApplication;
 import com.example.sklad_s_nalichnost.models.Client;
 import com.example.sklad_s_nalichnost.repositories.ClientRepository;
 import javafx.collections.FXCollections;
@@ -66,11 +67,14 @@ public class ClientController {
     }
 
     private void refreshTable() {
-        //tableView.setItems(DataList.instance.Clients);
-
+        if(!MainApplication.usesDB) {
+            tableView.setItems(DataList.instance.Clients);
+        }
+        else {
             tableView.setItems(
                     FXCollections.observableArrayList(clientRepo.getAll())
             );
+        }
     }
 
     @FXML
@@ -81,10 +85,14 @@ public class ClientController {
                 showError("Invalid Name", "Client name cannot be empty.");
                 return;
             }
-            //DataList.instance.Clients.add(new Client(name));
-            clientRepo.add(new Client(UUID.randomUUID(),name));
+        if(!MainApplication.usesDB) {
+            DataList.instance.Clients.add(new Client(name));
+        }
+        else {
+            clientRepo.add(new Client(UUID.randomUUID(), name));
             refreshTable();
             nameField.clear();
+        }
     }
 
     private void showError(String title, String message) {
@@ -99,7 +107,7 @@ public class ClientController {
     public void sellToClient(Client client){
         try {
             // Save selected buyer
-            //DataList.instance.setCurrentBuyer(client);
+            DataList.instance.setCurrentBuyer(client);
 
             // Load sell-stock-view.fxml
             Parent sellView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/sell-stock-view.fxml"));
