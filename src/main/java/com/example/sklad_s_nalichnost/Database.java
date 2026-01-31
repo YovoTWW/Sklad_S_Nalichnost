@@ -16,9 +16,9 @@ public class Database {
 
     public static Connection getConnection() throws SQLException {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("SQL Server JDBC Driver not found", e);
+            throw new RuntimeException("Oracle JDBC Driver not found", e);
         }
 
         if (connection == null || connection.isClosed()) {
@@ -28,66 +28,82 @@ public class Database {
     }
 }
     /*
-    use SkladDb;
+CREATE TABLE "Storage" (
+    storage_id INTEGER NOT NULL,
 
-create table Storage(
-Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY
+    PRIMARY KEY (storage_id)
 );
 
-create table Client(
-Id UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID() PRIMARY KEY,
-Name NVARCHAR(100) NOT NULL
+CREATE TABLE "Client" (
+    client_id INTEGER NOT NULL,
+    "name" VARCHAR2(100) NOT NULL,
+
+    PRIMARY KEY (client_id)
 );
 
-create table Supplier(
-Id UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID() PRIMARY KEY,
-Name NVARCHAR(100) NOT NULL
+CREATE TABLE Supplier (
+    supplier_id INTEGER NOT NULL,
+    "name" VARCHAR2(100) NOT NULL,
+
+    PRIMARY KEY (supplier_id)
 );
 
-create table Stock(
-Id UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID() PRIMARY KEY,
-Name NVARCHAR(100) NOT NULL,
-DeliveryPrice DECIMAL(10,2),
-SellingPrice DECIMAL(10,2),
-AvailableQuantity INT,
-StorageId INT NOT NULL,
-CONSTRAINT FK_Stock_Storage
-FOREIGN KEY (StorageId) REFERENCES Storage(Id)
+CREATE TABLE Stock (
+    stock_id INTEGER NOT NULL,
+    "name" VARCHAR2(100) NOT NULL,
+    delivery_price DECIMAL(10,2),
+    selling_price DECIMAL(10,2),
+    available_quantity INTEGER,
+    storage_id INTEGER NOT NULL,
+
+    PRIMARY KEY (stock_id),
+
+    CONSTRAINT FK_Stock_Storage
+        FOREIGN KEY (storage_id) REFERENCES "Storage"(storage_id)
 );
 
-create table Invoice(
-Id UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID() PRIMARY KEY,
-Text NVARCHAR(200) NOT NULL,
-StorageId INT NOT NULL,
-CONSTRAINT FK_Invoice_Storage
-FOREIGN KEY (StorageId) REFERENCES Storage(Id),
-SupplierId UNIQUEIDENTIFIER NOT NULL,
-CONSTRAINT FK_Invoice_Supplier
-FOREIGN KEY (SupplierId) REFERENCES Supplier(Id),
-ClientId UNIQUEIDENTIFIER NOT NULL,
-CONSTRAINT FK_Invoice_Client
-FOREIGN KEY (ClientId) REFERENCES Client(Id),
-StockId UNIQUEIDENTIFIER NOT NULL,
-CONSTRAINT FK_Invoice_Stock
-FOREIGN KEY (StockId) REFERENCES Stock(Id),
+CREATE TABLE Invoice (
+    invoice_id INTEGER NOT NULL,
+    "text" VARCHAR2(200) NOT NULL,
+    storage_id INTEGER NOT NULL,
+    supplier_id INTEGER NOT NULL,
+    client_id INTEGER NOT NULL,
+    stock_id INTEGER NOT NULL,
+
+    PRIMARY KEY (invoice_id),
+
+    CONSTRAINT FK_Invoice_Storage
+        FOREIGN KEY (storage_id) REFERENCES "Storage"(storage_id),
+
+    CONSTRAINT FK_Invoice_Supplier
+        FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+
+    CONSTRAINT FK_Invoice_Client
+        FOREIGN KEY (client_id) REFERENCES "Client"(client_id),
+
+    CONSTRAINT FK_Invoice_Stock
+        FOREIGN KEY (stock_id) REFERENCES Stock(stock_id)
 );
 
 
 CREATE TABLE SupplierStock (
-SupplierId UNIQUEIDENTIFIER NOT NULL,
-StockId UNIQUEIDENTIFIER NOT NULL,
-Quantity INT NOT NULL,
+    supplier_id INTEGER NOT NULL,
+    stock_id INTEGER NOT NULL,
+    Quantity INTEGER NOT NULL,
 
-PRIMARY KEY (SupplierId, StockId),
+    PRIMARY KEY (supplier_id, stock_id),
 
-FOREIGN KEY (SupplierId) REFERENCES Supplier(Id),
-FOREIGN KEY (StockId) REFERENCES Stock(Id)
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+    FOREIGN KEY (stock_id) REFERENCES Stock(stock_id)
 );
 
-create table Paydesk(
-StorageId INT NOT NULL PRIMARY KEY,
-Balance DECIMAL(10,2)
-CONSTRAINT FK_Paydesk_Storage
-FOREIGN KEY (StorageId) REFERENCES Storage(Id)
+CREATE TABLE Paydesk (
+    storage_id INTEGER NOT NULL,
+    balance DECIMAL(10,2),
+
+    PRIMARY KEY (storage_id),
+
+    CONSTRAINT FK_Paydesk_Storage
+        FOREIGN KEY (storage_id) REFERENCES "Storage"(storage_id)
 );
      */

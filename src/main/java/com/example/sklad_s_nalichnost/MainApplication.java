@@ -2,16 +2,20 @@ package com.example.sklad_s_nalichnost;
 
 import com.example.sklad_s_nalichnost.models.PayDesk;
 import com.example.sklad_s_nalichnost.models.Storage;
+import com.example.sklad_s_nalichnost.tests.DatabaseConnectionTest;
+import com.example.sklad_s_nalichnost.tests.Tester;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, SQLException {
+        Tester.testAll();
         Storage.instance.Initialize();
         PayDesk.instance.Initialize();
         DataList.instance.initialize();

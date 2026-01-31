@@ -7,7 +7,7 @@ import java.sql.*;
 public class PaydeskRepository {
 
     public double getBalance(int storageId) throws SQLException {
-        String sql = "SELECT Balance FROM Paydesk WHERE StorageId = ?";
+        String sql = "SELECT balance FROM Paydesk WHERE storage_id = ?";
 
         try (Connection con = Database.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -16,7 +16,7 @@ public class PaydeskRepository {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getDouble("Balance");
+                    return rs.getDouble("balance");
                 }
             }
         }
@@ -24,7 +24,7 @@ public class PaydeskRepository {
     }
 
     public void updateBalance(int storageId, double newBalance) throws SQLException {
-        String sql = "UPDATE Paydesk SET Balance = ? WHERE StorageId = ?";
+        String sql = "UPDATE Paydesk SET balance = ? WHERE storage_id = ?";
 
         try (Connection con = Database.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
