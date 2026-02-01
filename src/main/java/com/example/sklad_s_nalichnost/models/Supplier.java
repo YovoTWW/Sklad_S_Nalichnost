@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.util.UUID;
 
 public class Supplier {
-    private UUID Id;
+    private final UUID Id;
     private String Name;
     private ObservableList<Stock> supplierStock;
 

@@ -1,8 +1,12 @@
 package com.example.sklad_s_nalichnost.controllers;
 
 import com.example.sklad_s_nalichnost.DataList;
+import com.example.sklad_s_nalichnost.MainApplication;
 import com.example.sklad_s_nalichnost.models.Stock;
 import com.example.sklad_s_nalichnost.models.Storage;
+import com.example.sklad_s_nalichnost.repositories.PaydeskRepository;
+import com.example.sklad_s_nalichnost.repositories.StockRepository;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +37,9 @@ public class SellStockController {
     @FXML
     private Button confirmButton;
 
+    private final StockRepository stockRepo = new StockRepository();
+    private final PaydeskRepository paydeskRepo = new PaydeskRepository();
+
     @FXML
     public void initialize() {
 
@@ -51,6 +58,7 @@ public class SellStockController {
 
         // Fill dropdown with stock items
         stockDropdown.setItems(Storage.instance.getAvailableStock());
+        refreshTable();
 
         // When user selects a stock
         stockDropdown.valueProperty().addListener((obs, old, selected) -> {
@@ -82,6 +90,17 @@ public class SellStockController {
         });
     }
 
+    private void refreshTable() {
+        if(!MainApplication.usesDB) {
+            stockDropdown.setItems(DataList.instance.BuyableStock);
+        }
+        else {
+            stockDropdown.setItems(
+                    FXCollections.observableArrayList(stockRepo.getAll())
+            );
+        }
+    }
+
     @FXML
     public void onConfirm() {
         Stock selected = stockDropdown.getValue();
@@ -104,8 +123,23 @@ public class SellStockController {
                 " | Quantity: " + quantity);
         // --------------------------------------------------
 
+
         showInfo("You selected " + quantity + " of " + selected.getName());
-        DataList.instance.SellStock(stockId,quantity);
+        if(!MainApplication.usesDB) {
+            DataList.instance.SellStock(stockId, quantity);
+        }
+        else {
+            int availableQuantity = stockRepo.getQuantity(stockId);
+
+            if(availableQuantity >= quantity) {
+                stockRepo.updateQuantity(stockId, availableQuantity - quantity);
+
+                int sellingPrice = stockRepo.getSellingPrice(stockId);
+                double balance = paydeskRepo.getBalance();
+
+                paydeskRepo.updateBalance(balance + sellingPrice * (double)quantity);
+            }
+        }
         resetFields();
     }
 

@@ -1,5 +1,7 @@
 package com.example.sklad_s_nalichnost.models;
 
+import com.example.sklad_s_nalichnost.repositories.StorageUUID;
+
 import java.util.UUID;
 
 public class Stock {
@@ -8,6 +10,7 @@ public class Stock {
     private double deliveryPrice;
     private double sellingPrice;
     private int availableQuantity;
+    private UUID storageId;
 
     public Stock(String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
         id = UUID.randomUUID();
@@ -15,14 +18,16 @@ public class Stock {
         this.deliveryPrice = deliveryPrice;
         this.sellingPrice = sellingPrice;
         this.availableQuantity = availableQuantity;
+        this.storageId = StorageUUID.StorageId;
     }
 
-    public Stock(UUID id,String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
+    public Stock(UUID id, String name, double deliveryPrice, double sellingPrice, int availableQuantity) {
         this.id = id;
         this.name = name;
         this.deliveryPrice = deliveryPrice;
         this.sellingPrice = sellingPrice;
         this.availableQuantity = availableQuantity;
+        this.storageId = StorageUUID.StorageId;
     }
 
     public UUID getId() {
@@ -60,4 +65,8 @@ public class Stock {
     public void setName(String name) {
         this.name = name;
     }
+
+    public UUID getStorageId() { return storageId; }
+
+    public void setStorageId(UUID storageId) { this.storageId = storageId; }
 }

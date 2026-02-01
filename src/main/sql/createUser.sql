@@ -1,0 +1,3 @@
+CREATE USER testuser IDENTIFIED BY testpass;
+GRANT CREATE SESSION TO testuser;
+GRANT ALL PRIVILEGES TO testuser;

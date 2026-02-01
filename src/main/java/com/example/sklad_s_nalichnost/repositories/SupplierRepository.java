@@ -12,7 +12,7 @@ public class SupplierRepository {
     public List<Supplier> findAll() {
         List<Supplier> suppliers = new ArrayList<>();
 
-        String sql = "SELECT Id, Name FROM Supplier";
+        String sql = "SELECT * FROM Supplier";
 
         try (Connection con = Database.getConnection();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -20,8 +20,8 @@ public class SupplierRepository {
 
             while (rs.next()) {
                 suppliers.add(new Supplier(
-                        rs.getObject("Id", UUID.class),
-                        rs.getString("Name")
+                        UUID.fromString(rs.getString("supplier_id")),
+                        rs.getString("name")
                 ));
             }
         }
@@ -32,7 +32,7 @@ public class SupplierRepository {
     }
 
     public void add(Supplier supplier) {
-        String sql = "INSERT INTO Supplier (Id, Name) VALUES (?, ?)";
+        String sql = "INSERT INTO Supplier VALUES (?, ?)";
 
         try (Connection c = Database.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {

@@ -5,8 +5,8 @@ public class Tester {
         try {
             DatabaseConnectionTest.test(
                     "jdbc:oracle:thin:@//localhost:1521/XEPDB1",
-                    "QX",
-                    "bunny77",
+                    "testuser",
+                    "testpass",
                     "SELECT * FROM \"Client\""
             );
         } catch (Exception e) {
@@ -15,6 +15,6 @@ public class Tester {
             return;
         }
 
-        System.out.println("No errors found.");
+        System.out.println("No database connection errors found.");
     }
 }

@@ -12,7 +12,7 @@ public class ClientRepository {
 
     public ObservableList<Client> getAll() {
         ObservableList<Client> clients = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM \"Clients\"";
+        String sql = "SELECT * FROM \"Client\"";
 
         try (Connection c = Database.getConnection();
              PreparedStatement ps = c.prepareStatement(sql);
@@ -20,8 +20,8 @@ public class ClientRepository {
 
             while (rs.next()) {
                 clients.add(new Client(
-                        UUID.fromString(rs.getString("Id")),
-                        rs.getString("Name")
+                        UUID.fromString(rs.getString("client_id")),
+                        rs.getString("name")
                 ));
             }
         } catch (SQLException e) {
@@ -32,7 +32,7 @@ public class ClientRepository {
     }
 
     public void add(Client client) {
-        String sql = "INSERT INTO Clients (Id, Name) VALUES (?, ?)";
+        String sql = "INSERT INTO \"Client\" VALUES (?, ?)";
 
         try (Connection c = Database.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {

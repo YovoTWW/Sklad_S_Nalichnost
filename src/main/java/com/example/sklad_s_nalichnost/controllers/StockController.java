@@ -1,7 +1,12 @@
 package com.example.sklad_s_nalichnost.controllers;
 
+import com.example.sklad_s_nalichnost.DataList;
+import com.example.sklad_s_nalichnost.MainApplication;
 import com.example.sklad_s_nalichnost.models.Stock;
 import com.example.sklad_s_nalichnost.models.Storage;
+import com.example.sklad_s_nalichnost.repositories.ClientRepository;
+import com.example.sklad_s_nalichnost.repositories.StockRepository;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +31,7 @@ public class StockController {
     private TableColumn<Stock, Double> deliveryPriceCol;
     @FXML
     private TableColumn<Stock, Double> sellingPriceCol;
+    private final StockRepository stockRepo = new StockRepository();
 
     @FXML
     public void initialize() {
@@ -38,6 +44,18 @@ public class StockController {
 
         // Add data to table
         tableView.setItems(Storage.instance.getAvailableStock());
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        if(!MainApplication.usesDB) {
+            tableView.setItems(DataList.instance.BuyableStock);
+        }
+        else {
+            tableView.setItems(
+                    FXCollections.observableArrayList(stockRepo.getAll())
+            );
+        }
     }
 
     @FXML

@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.util.UUID;
 
-public  class Storage {
+public class Storage {
 
     public static final Storage instance = new Storage();
     private ObservableList<Stock> availableStock;

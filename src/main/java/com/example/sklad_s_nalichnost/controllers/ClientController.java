@@ -61,9 +61,9 @@ public class ClientController {
                     setGraphic(btn);
                 }
             }
+        });
 
-     });
-     refreshTable();
+        refreshTable();
     }
 
     private void refreshTable() {
