@@ -131,7 +131,7 @@ public class SellStockController {
     public void goBack(ActionEvent event) throws IOException {
         Parent homeView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/client-view.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(homeView,500,500));
+        stage.setScene(new Scene(homeView,500,600));
         stage.show();
     }
 }

@@ -1,10 +1,14 @@
 package com.example.sklad_s_nalichnost.controllers;
 
 import com.example.sklad_s_nalichnost.DataList;
+import com.example.sklad_s_nalichnost.MainApplication;
 import com.example.sklad_s_nalichnost.models.Client;
 import com.example.sklad_s_nalichnost.models.Stock;
 import com.example.sklad_s_nalichnost.models.Storage;
 import com.example.sklad_s_nalichnost.models.Supplier;
+import com.example.sklad_s_nalichnost.repositories.ClientRepository;
+import com.example.sklad_s_nalichnost.repositories.SupplierRepository;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +34,8 @@ public class SupplierController {
     private TableColumn<Supplier, Void> buyCol;
     @FXML
     private TextField nameField;
+
+    private final SupplierRepository supplierRepo = new SupplierRepository();
 
     @FXML
     public void initialize() {
@@ -62,7 +68,14 @@ public class SupplierController {
     }
 
     private void refreshTable() {
-        tableView.setItems(DataList.instance.Suppliers);
+        if(!MainApplication.usesDB) {
+            tableView.setItems(DataList.instance.Suppliers);
+        }
+        else {
+            tableView.setItems(
+                    FXCollections.observableArrayList(supplierRepo.findAll())
+            );
+        }
     }
 
     @FXML
@@ -95,9 +108,14 @@ public class SupplierController {
             showError("Invalid Name", "Supplier name cannot be empty.");
             return;
         }
-        DataList.instance.Suppliers.add(new Supplier(name));
-        refreshTable();
-        nameField.clear();
+        if(!MainApplication.usesDB) {
+            DataList.instance.Suppliers.add(new Supplier(name));
+        }
+        else {
+            supplierRepo.add(new Supplier(UUID.randomUUID(), name));
+        }
+            refreshTable();
+            nameField.clear();
     }
 
     private void showError(String title, String message) {
@@ -112,7 +130,7 @@ public class SupplierController {
     public void goBack(ActionEvent event) throws IOException {
         Parent homeView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/home-view.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(homeView,320,240));
+        stage.setScene(new Scene(homeView,500,600));
         stage.show();
     }
 }

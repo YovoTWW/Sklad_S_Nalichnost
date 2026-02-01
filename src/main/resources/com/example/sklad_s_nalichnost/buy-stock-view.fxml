@@ -27,6 +27,7 @@
         <TextField fx:id="quantityField" prefWidth="80"/>
         <Label fx:id="maxLabel" text="(max: -)"/>
     </HBox>
+    
 
     <!-- Hidden until stock is selected -->
     <Button fx:id="confirmButton" text="Confirm" visible="false" prefWidth="120"

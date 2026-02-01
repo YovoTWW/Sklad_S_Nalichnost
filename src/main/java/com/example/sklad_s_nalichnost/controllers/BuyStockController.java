@@ -1,8 +1,13 @@
 package com.example.sklad_s_nalichnost.controllers;
 
 import com.example.sklad_s_nalichnost.DataList;
+import com.example.sklad_s_nalichnost.MainApplication;
+import com.example.sklad_s_nalichnost.models.PayDesk;
 import com.example.sklad_s_nalichnost.models.Stock;
 import com.example.sklad_s_nalichnost.models.Storage;
+import com.example.sklad_s_nalichnost.repositories.ClientRepository;
+import com.example.sklad_s_nalichnost.repositories.PaydeskRepository;
+import com.example.sklad_s_nalichnost.repositories.StockRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +37,9 @@ public class BuyStockController {
 
     @FXML
     private Button confirmButton;
+
+    private final StockRepository stockRepo = new StockRepository();
+    private final PaydeskRepository paydeskRepo = new PaydeskRepository();
 
     @FXML
     public void initialize() {
@@ -98,15 +106,26 @@ public class BuyStockController {
 
         int quantity = Integer.parseInt(quantityField.getText());
         UUID stockId = selected.getId();
-        // Call your event here
-        // --------------------------------------------------
+
         System.out.println("Selected: " + selected.getName() +
                 " | Quantity: " + quantity);
         // --------------------------------------------------
-
-        showInfo("You selected " + quantity + " of " + selected.getName());
-        DataList.instance.BuyStock(stockId,quantity);
+        if(!MainApplication.usesDB) {
+            DataList.instance.BuyStock(stockId, quantity);
+        }
+        else
+        {
+            /*if(paydeskRepo.getBalance((int)1) >= (stockRepo.getDeliveryPrice(stockId)*quantity)) {
+                //int availableQuantity = stockRepo.getQuantity(stockId);
+                stockRepo.updateQuantity(stockId, quantity);
+            }*/
+        }
         resetFields();
+    }
+
+    private void showError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
+        alert.showAndWait();
     }
 
     private void resetFields() {
@@ -117,21 +136,11 @@ public class BuyStockController {
         confirmButton.setVisible(false);                     // hide confirm button
     }
 
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
-        alert.showAndWait();
-    }
-
-    private void showInfo(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
-        alert.showAndWait();
-    }
-
     @FXML
     public void goBack(ActionEvent event) throws IOException {
         Parent homeView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/supplier-view.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(homeView,500,500));
+        stage.setScene(new Scene(homeView,500,600));
         stage.show();
     }
 }

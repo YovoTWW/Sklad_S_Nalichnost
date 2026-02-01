@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class PaydeskRepository {
 
-    public double getBalance(int storageId) throws SQLException {
+    public double getBalance(int storageId){
         String sql = "SELECT balance FROM Paydesk WHERE storage_id = ?";
 
         try (Connection con = Database.getConnection();
@@ -20,10 +20,13 @@ public class PaydeskRepository {
                 }
             }
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
-    public void updateBalance(int storageId, double newBalance) throws SQLException {
+    public void updateBalance(int storageId, double newBalance){
         String sql = "UPDATE Paydesk SET balance = ? WHERE storage_id = ?";
 
         try (Connection con = Database.getConnection();
@@ -31,6 +34,9 @@ public class PaydeskRepository {
             ps.setDouble(1, newBalance);
             ps.setInt(2, storageId);
             ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

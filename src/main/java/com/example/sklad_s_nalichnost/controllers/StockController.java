@@ -44,7 +44,7 @@ public class StockController {
     public void goBack(ActionEvent event) throws IOException {
         Parent homeView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/home-view.fxml"));
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(homeView,320,240));
+        stage.setScene(new Scene(homeView,500,600));
         stage.show();
     }
 }

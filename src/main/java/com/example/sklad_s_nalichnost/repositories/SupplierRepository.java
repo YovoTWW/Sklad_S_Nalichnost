@@ -9,7 +9,7 @@ import java.util.*;
 
 public class SupplierRepository {
 
-    public List<Supplier> findAll() throws SQLException {
+    public List<Supplier> findAll() {
         List<Supplier> suppliers = new ArrayList<>();
 
         String sql = "SELECT Id, Name FROM Supplier";
@@ -24,6 +24,9 @@ public class SupplierRepository {
                         rs.getString("Name")
                 ));
             }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return suppliers;
     }

@@ -20,7 +20,7 @@ public class MainApplication extends Application {
         PayDesk.instance.Initialize();
         DataList.instance.initialize();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("home-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
         stage.setTitle("Output");
         stage.setScene(scene);
         stage.show();

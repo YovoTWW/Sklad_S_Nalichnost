@@ -26,26 +26,38 @@ public class HomeController {
     }
 
     @FXML
-    protected void ShowClients(javafx.event.ActionEvent event) throws IOException{
-        Parent stockView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/client-view.fxml"));
+    protected void ShowInvoices(javafx.event.ActionEvent event) throws IOException{
+        Parent invoiceView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/invoices-view.fxml"));
 
         // Get current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Replace scene
-        stage.setScene(new Scene(stockView,500,500));
+        stage.setScene(new Scene(invoiceView,1200,500));
+        stage.show();
+    }
+
+    @FXML
+    protected void ShowClients(javafx.event.ActionEvent event) throws IOException{
+        Parent clientView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/client-view.fxml"));
+
+        // Get current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Replace scene
+        stage.setScene(new Scene(clientView,500,500));
         stage.show();
     }
 
     @FXML
     protected void ShowSuppliers(javafx.event.ActionEvent event) throws IOException{
-        Parent stockView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/supplier-view.fxml"));
+        Parent supplierView = FXMLLoader.load(getClass().getResource("/com/example/sklad_s_nalichnost/supplier-view.fxml"));
 
         // Get current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Replace scene
-        stage.setScene(new Scene(stockView,500,500));
+        stage.setScene(new Scene(supplierView,500,500));
         stage.show();
     }
 
